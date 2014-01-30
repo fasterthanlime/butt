@@ -22,7 +22,7 @@ Run `make`, launch `./butt`. What do you mean you don't have all the dependencie
   * Install luajit 2.0.1
   * Install luarocks
   * Do `make lualibs` - that should install moonscript in there
-  * Get sam and do `sam get`, or clone ooc-lua & dye yourself in `$OOC_LIBS`
+  * Get sam and do `sam get`, or clone ooc-lua & dye & the rest yourself in `$OOC_LIBS`
 
 What do you mean those instructions aren't newcomer-friendly? Well they're not supposed to be!
   
@@ -30,10 +30,16 @@ What do you mean those instructions aren't newcomer-friendly? Well they're not s
 
   * ooc language: <http://ooc-lang.org>
   * ooc compiler: <https://github.com/nddrylliog/rock>
-  * dye 2D framework: <https://github.com/nddrylliog/dye>
-  * ooc <-> lua bridge: <https://github.com/fredreichbier/ooc-lua>
   * lua's coffeescript: <http://moonscript.org>
   * preferred lua impl: <http://luajit.org/>
+
+Moar:
+
+  * luarocks (lua package installer): <http://luarocks.org/>
+  * sam (ooc package installer): <https://github.com/nddrylliog/sam>
+  * dye 2D framework: <https://github.com/nddrylliog/dye>
+  * ooc <-> lua bridge: <https://github.com/fredreichbier/ooc-lua>
+  * ooc tiled map loader: <https://github.com/fredreichbier/ooc-tiled>
 
 ### License
 
