@@ -1,15 +1,24 @@
 ## butt
 
-I'm doing stuff to test stuff and I don't want to lose it so public GitHub repo
-because I have run out of private repos. But it's not top-secret.
+So ooc has this graphics framework, dye, right? And it's cool and high-level and stuff.
+
+And lua is pretty cool to script, right? Except it's better to write moonscript.
+
+And lua is easy to embed right? Except the ffi is slow when doing `C->Lua`, so we want
+most of the game logic to run in lua, right?
+
+So that's mostly what butt is about testing.
 
 ### Authors
 
-  * Please leave me alone
+  * Not me, I swear
   
 ### Links
 
-  * <http://perdu.com>
+  * <http://ooc-lang.org>
+  * <https://github.com/nddrylliog/dye>
+  * <http://moonscript.org>
+  * <http://luajit.org/>
 
 ### License
 
