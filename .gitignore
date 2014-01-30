@@ -1,10 +1,21 @@
-.libs
-.sam-cache
-rock_tmp
+# ooc stuff
+/.libs
+/.sam-cache
+/rock_tmp
 
+# generated stuff
 /luaprefix
 /build
+/butt.repo
+
+# *nix executable
 /butt
+
+# Win32 exe
 *.exe
+
+# OSX debug symbols
 *.dSYM
 
+# log stuff
+/app.log
