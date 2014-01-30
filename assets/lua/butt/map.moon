@@ -11,7 +11,6 @@ list = require 'util.list'
 
 class Layer
   new: (@map, @tlayer) =>
-    print "tlayer = #{@tlayer.class.name}"
     @tmap = @map.tmap
     @group = dye_core.GlGroup.new()
     @build!
