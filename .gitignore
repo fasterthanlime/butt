@@ -1,0 +1,10 @@
+.libs
+.sam-cache
+rock_tmp
+
+/luaprefix
+/build
+/butt
+*.exe
+*.dSYM
+
