@@ -1,6 +1,6 @@
 
 -- fix that library stuff
-local luaprefix = "/Users/amos/Dev/butt/luaprefix"
+local luaprefix = "./luaprefix"
 package.path = package.path .. ";assets/lua/?.lua"
 package.path = package.path .. ";" .. luaprefix .. "/share/lua/5.1/?/init.lua;" .. luaprefix .. "/share/lua/5.1/?.lua"
 package.cpath = luaprefix .. "/lib/lua/5.1/?.so"
