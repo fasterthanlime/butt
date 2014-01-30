@@ -12,13 +12,28 @@ So that's mostly what butt is about testing.
 ### Authors
 
   * Not me, I swear
+
+### How to build
+
+Run `make`, launch `./butt`. What do you mean you don't have all the dependencies?
+
+  * Get rock 99x's branch working and in your path
+  * Get clang or change the Makefile
+  * Install luajit 2.0.1
+  * Install luarocks
+  * Do `make lualibs` - that should install moonscript in there
+  * Get sam and do `sam get`, or clone ooc-lua & dye yourself in `$OOC_LIBS`
+
+What do you mean those instructions aren't newcomer-friendly? Well they're not supposed to be!
   
 ### Links
 
-  * <http://ooc-lang.org>
-  * <https://github.com/nddrylliog/dye>
-  * <http://moonscript.org>
-  * <http://luajit.org/>
+  * ooc language: <http://ooc-lang.org>
+  * ooc compiler: <https://github.com/nddrylliog/rock>
+  * dye 2D framework: <https://github.com/nddrylliog/dye>
+  * ooc <-> lua bridge: <https://github.com/fredreichbier/ooc-lua>
+  * lua's coffeescript: <http://moonscript.org>
+  * preferred lua impl: <http://luajit.org/>
 
 ### License
 
