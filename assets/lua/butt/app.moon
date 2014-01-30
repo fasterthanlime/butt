@@ -6,18 +6,13 @@ math = require 'math'
 -- ooc stuff
 dye_sprite = require 'dye:dye/sprite'
 dye_text = require 'dye:dye/text'
-tiled_Map = require 'tiled:tiled/Map'
-tiled_Layer = require 'tiled:tiled/Layer'
 io_File = require 'sdk:io/File'
 
 -- util stuff
-list = require 'util.list'
-
--- our module
-app = {}
+map = require 'butt.map'
 
 -- Where the magic 'appens
-class app.App
+class App
     new: (@butt) =>
         @dye = @butt.dye
         @input = @dye.input
@@ -27,11 +22,7 @@ class app.App
         @dye.mainPass.clearColor\set__bang_ints(40, 15, 27)
 
         -- load a map maybe?
-        @map = tiled_Map.Map.new(io_File.File.new 'assets/maps/buttmap.tmx')
-        print "map orientation = #{@map.orientation}"
-
-        @layer = list.get(@map.mapLayers, 0, tiled_Layer.Layer)
-        print "@layer name = #{@layer.name}"
+        @map = map.Map(@, "assets/maps/buttmap.tmx")
 
         -- load a sprite and stuff
         @sprite = dye_sprite.GlSprite.new_fromPath 'assets/png/itch.png'
@@ -66,5 +57,7 @@ class app.App
             @sprite.opacity = 1.0
 
 -- export da module
-return app
+return {
+  :App
+}
 
