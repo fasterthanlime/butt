@@ -20,12 +20,14 @@ class App
         -- set dat clear color
         @dye.mainPass.clearColor\set__bang_ints(40, 15, 27)
 
+        -- load a sprite and stuff
+        @sprite = dye_sprite.GlSprite.new_fromPath 'assets/png/almightysuit.png'
+        @sprite.center = false
+        @dye\add @sprite
+
         -- load a map maybe?
         @map = map.Map(@, "assets/maps/buttmap.tmx")
-
-        -- load a sprite and stuff
-        @sprite = dye_sprite.GlSprite.new_fromPath 'assets/png/itch.png'
-        @dye\add @sprite
+        @dye\add @map.group
 
         -- maek some text
         @text = dye_text.GlText.new 'assets/ttf/noodle.ttf', 'SPACE DONKEYS', 40
@@ -34,7 +36,7 @@ class App
             .g = 128
             .b = 50
         with @text.pos
-            .x = 800 / 2 - @text.size.x / 2
+            .x = 1280 / 2 - @text.size.x / 2
             .y = 40
         @dye\add @text
 
@@ -43,17 +45,13 @@ class App
         @frame += 1
 
         -- move dat sprite body
-        @sprite.pos = @input.mousepos
+        @map.group.pos\set__bang_twofloats(math.floor(@input.mousepos.x / 32) * 32, math.floor(@input.mousepos.y / 32) * 32)
 
         -- update window title
         @dye\setTitle "[PRESS SPACE] frame #{@frame}, fps = #{math.floor(@butt.loop.fps)}"
 
         @text.visible = @input\isPressed(44)
-
-        if @text.visible
-            @sprite.opacity = 0.5
-        else
-            @sprite.opacity = 1.0
+        @map.visible = not @text.visible
 
 -- export da module
 return {
