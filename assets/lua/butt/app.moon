@@ -18,15 +18,16 @@ class App
         @frame = 0
 
         -- set dat clear color
-        @dye.mainPass.clearColor\set__bang_ints(40, 15, 27)
+        @dye.mainPass.clearColor\set__bang_ints(255, 255, 255)
 
         -- load a sprite and stuff
         @sprite = dye_sprite.GlSprite.new_fromPath 'assets/png/almightysuit.png'
         @sprite.center = false
+        @sprite.opacity = 0.1
         @dye\add @sprite
 
         -- load a map maybe?
-        @map = map.Map(@, "assets/maps/buttmap.tmx")
+        @map = map.Map(@, "assets/maps/tuto1.tmx")
         @dye\add @map.group
 
         -- maek some text
@@ -43,9 +44,6 @@ class App
     update: =>
         -- count frames, yay
         @frame += 1
-
-        -- move dat sprite body
-        @map.group.pos\set__bang_twofloats(math.floor(@input.mousepos.x / 32) * 32, math.floor(@input.mousepos.y / 32) * 32)
 
         -- update window title
         @dye\setTitle "[PRESS SPACE] frame #{@frame}, fps = #{math.floor(@butt.loop.fps)}"
