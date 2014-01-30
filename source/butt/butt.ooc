@@ -8,19 +8,28 @@ import lua/howling/[Binding]
 
 Butt: class extends App {
 
+    // loofah
     lua: Binding
 
     init: func {
+        instance = this
         super("Butt")
-        lua := Binding new("butt.repo")
     }
 
     setup: func {
-        "Shed me up" println()
+        lua = Binding new("butt.repo")
+        lua runFile("assets/lua/init.lua")
     }
 
     update: func {
-        "Naananana updateman" println()
+        lua runString("butt_update()")
+    }
+
+    // shingleton
+    instance: static This
+
+    getInstance: static func -> This {
+        instance
     }
 
 }
@@ -30,3 +39,4 @@ main: func {
     butt := Butt new()
     butt run(60.0f)
 }
+
