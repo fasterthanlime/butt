@@ -1,6 +1,6 @@
 Name: butt
 SourcePath: source
 Main: butt/butt
-Requires: dye, luajit
+Requires: dye, luajit, tiled
 LuaBindings: ./butt.repo
 

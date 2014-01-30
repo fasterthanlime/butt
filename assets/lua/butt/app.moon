@@ -6,6 +6,12 @@ math = require 'math'
 -- ooc stuff
 dye_sprite = require 'dye:dye/sprite'
 dye_text = require 'dye:dye/text'
+tiled_Map = require 'tiled:tiled/Map'
+tiled_Layer = require 'tiled:tiled/Layer'
+io_File = require 'sdk:io/File'
+
+-- util stuff
+list = require 'util.list'
 
 -- our module
 app = {}
@@ -20,11 +26,19 @@ class app.App
         -- set dat clear color
         @dye.mainPass.clearColor\set__bang_ints(40, 15, 27)
 
+        -- load a map maybe?
+        @map = tiled_Map.Map.new(io_File.File.new 'assets/maps/buttmap.tmx')
+        print "map orientation = #{@map.orientation}"
+
+        @layer = list.get(@map.mapLayers, 0, tiled_Layer.Layer)
+        print "@layer name = #{@layer.name}"
+
         -- load a sprite and stuff
-        @sprite = dye_sprite.GlSprite.new_fromPath "assets/png/itch.png"
+        @sprite = dye_sprite.GlSprite.new_fromPath 'assets/png/itch.png'
         @dye\add ffi.cast('void*', @sprite)
 
-        @text = dye_text.GlText.new "assets/ttf/noodle.ttf", "SPACE DONKEYS", 40
+        -- maek some text
+        @text = dye_text.GlText.new 'assets/ttf/noodle.ttf', 'SPACE DONKEYS', 40
         with @text.color
             .r = 255
             .g = 128

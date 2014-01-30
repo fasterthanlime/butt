@@ -5,3 +5,6 @@
 use dye
 import dye/[core, sprite, text]
 
+use tiled
+import tiled/[Map, Layer, Tile, TileSet, Image, data, helpers]
+
