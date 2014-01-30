@@ -6,6 +6,9 @@ use dye, luajit
 import dye/[app]
 import lua/howling/[Binding]
 
+// awwwwwww link all dat shit
+import butt/catchall
+
 Butt: class extends App {
 
     // loofah

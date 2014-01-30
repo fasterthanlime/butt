@@ -19,3 +19,6 @@
 
 # log stuff
 /app.log
+
+# OSX Finder shit
+.DS_Store
