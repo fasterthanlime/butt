@@ -1,6 +1,5 @@
 
 -- lua stuff
-ffi = require 'ffi'
 math = require 'math'
 
 -- ooc stuff
@@ -26,7 +25,7 @@ class App
 
         -- load a sprite and stuff
         @sprite = dye_sprite.GlSprite.new_fromPath 'assets/png/itch.png'
-        @dye\add ffi.cast('void*', @sprite)
+        @dye\add @sprite
 
         -- maek some text
         @text = dye_text.GlText.new 'assets/ttf/noodle.ttf', 'SPACE DONKEYS', 40
@@ -37,7 +36,7 @@ class App
         with @text.pos
             .x = 800 / 2 - @text.size.x / 2
             .y = 40
-        @dye\add ffi.cast('void*', @text)
+        @dye\add @text
 
     update: =>
         -- count frames, yay
