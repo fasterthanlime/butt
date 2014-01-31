@@ -1,11 +1,13 @@
 
 -- lua stuff
 math = require 'math'
+howling = require 'howling'
 
 -- ooc stuff
 dye_sprite = require 'dye:dye/sprite'
 dye_text = require 'dye:dye/text'
 dye_primitives = require 'dye:dye/primitives'
+dye_input = require 'dye:dye/input'
 io_File = require 'sdk:io/File'
 
 -- util stuff
@@ -43,24 +45,27 @@ class App
     @dye\add @text
 
     @offsetindex = 1
+    
+    onkp = (kp) ->
+      @keyPress(kp.scancode)
+    @input\onKeyPress_any howling.make_closure(onkp, "void", dye_input.KeyPress)
 
-  update: =>
-    -- count frames, yay
-    @frame += 1
-    if (@frame % 15) == 0
+  keyPress: (scancode) =>
+    switch scancode
       -- down
-      if @input\isPressed(81)
+      when 81
         @offsetindex -= 1
-
       -- up
-      if @input\isPressed(82)
+      when 82
         @offsetindex += 1
 
+  clampOffsetIndex: =>
     if @offsetindex > @map.numLayers
       @offsetindex -= @map.numLayers
     elseif @offsetindex < 1
       @offsetindex += @map.numLayers
 
+  focusLayer: =>
     for i = 1, tonumber(@map.numLayers)
       if @map.layers[i] == nil
         continue
@@ -72,6 +77,13 @@ class App
           .opacity = 1.0
         else
           .opacity = 0.2
+
+  update: =>
+    -- count frames, yay
+    @frame += 1
+
+    @clampOffsetIndex()
+    @focusLayer()
 
     if @map.layers[@offsetindex] == nil
       @text.value = "layer #{@offsetindex}"
