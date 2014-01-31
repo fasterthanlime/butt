@@ -8,7 +8,7 @@ local luaprefix = "./luaprefix"
 local luaext = "so"
 if ffi.os == "Windows" then
   luaext = "dll"
-else if ffi.os == "OSX" then
+elseif ffi.os == "OSX" then
   luaext = "dylib"
 end
 
