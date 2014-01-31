@@ -3,7 +3,9 @@
 local luaprefix = "./luaprefix"
 package.path = package.path .. ";assets/lua/?.lua"
 package.path = package.path .. ";" .. luaprefix .. "/share/lua/5.1/?/init.lua;" .. luaprefix .. "/share/lua/5.1/?.lua"
-package.cpath = luaprefix .. "/lib/lua/5.1/?.so"
+package.path = package.path .. ";" .. luaprefix .. "/share/lua/5.2/?/init.lua;" .. luaprefix .. "/share/lua/5.2/?.lua"
+package.cpath = package.cpath .. ";" .. luaprefix .. "/lib/lua/5.1/?.so"
+package.cpath = package.cpath .. ";" .. luaprefix .. "/lib/lua/5.2/?.so"
 
 -- moon > coffee
 require("moonscript")
