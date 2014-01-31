@@ -11,7 +11,7 @@ dye_fbo = require 'dye:dye/gritty/fbo'
 
 -- util stuff
 list = require 'util.list'
-hashmap = require 'util.map'
+hashmap = require 'util.hashmap'
 
 class Layer
   @totalTiles: 0
