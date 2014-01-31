@@ -19,5 +19,15 @@ clean:
 	rock -x
 	rm -rf *.dSYM
 
+win32:
+	PATH=/usr/i686-w64-mingw32/bin:$(PATH) \
+	PKG_CONFIG_PATH=/usr/i686-w64-mingw32/lib/pkgconfig \
+	rock --host=i686-w64-mingw32 -L$(HOME)/Dev/dummyprefix-i686-w64-mingw32/lib -v
+
+osx32:
+	PATH=/usr/i686-apple-darwin11/usr/bin:$(PATH) \
+	PKG_CONFIG_PATH=/usr/i686-apple-darwin11/usr/lib/pkgconfig \
+	rock --host=i686-apple-darwin11 -L$(HOME)/Dev/dummyprefix-i686-apple-darwin11/lib --bannedflag=-fno-pie -v
+
 spotless: clean lualibs-clean
 
