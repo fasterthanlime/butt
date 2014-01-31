@@ -8,6 +8,7 @@ dye_sprite = require 'dye:dye/sprite'
 
 -- util stuff
 list = require 'util.list'
+Layer = require('butt.layer').Layer
 
 class Map
   new: (@app, @path) =>
@@ -31,6 +32,8 @@ class Map
       layer = Layer(@, tlayer)
       @layers[i] = layer
       @group\add layer.group
+
+    print "Have #{Layer.totalTiles} total tiles"
 
 return {
   :Map

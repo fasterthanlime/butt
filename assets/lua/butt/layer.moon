@@ -10,6 +10,8 @@ dye_sprite = require 'dye:dye/sprite'
 list = require 'util.list'
 
 class Layer
+  @totalTiles: 0
+
   new: (@map, @tlayer) =>
     @tmap = @map.tmap
     @group = dye_core.GlGroup.new()
@@ -31,6 +33,8 @@ class Layer
       -- skip empty tiles
       return
 
+    @@totalTiles += 1
+
     tileSet = tile.tileSet
     image = tileSet.image
     source = image.source
@@ -49,4 +53,8 @@ class Layer
       .y = (@tmap.height - 1 - y) * tileSet.tileHeight
 
     @group\add sprite
+
+return {
+  :Layer
+}
 
