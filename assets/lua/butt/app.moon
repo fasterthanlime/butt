@@ -8,6 +8,7 @@ dye_sprite = require 'dye:dye/sprite'
 dye_text = require 'dye:dye/text'
 dye_primitives = require 'dye:dye/primitives'
 dye_input = require 'dye:dye/input'
+quantum_world = require 'quantum:quantum/world'
 io_File = require 'sdk:io/File'
 
 -- util stuff
@@ -17,15 +18,28 @@ map = require 'butt.map'
 class App
   new: (@butt) =>
     @dye = @butt.dye
+    @world = quantum_world.World.new()
+
     @input = @dye.input
     @frame = 0
 
     -- set dat clear color
-    @dye.mainPass.clearColor\set__bang_ints(255, 255, 255)
+    @dye.mainPass.clearColor\set__bang(255, 255, 255)
 
     -- load a map maybe?
     @map = map.Map(@, "assets/maps/tuto1.tmx")
     @dye\add @map.group
+
+    -- PHYSX TEST STARTS
+    shape = quantum_world.AABBShape.new(20, 20)
+    @body = quantum_world.Body.new(shape)
+    @world\addBody @body
+
+    hero = dye_sprite.GlSprite.new("assets/png/hero-idle.png")
+    hero.pos = @body.pos
+    hero.pos\set__bang(600, 400)
+    @dye\add hero
+    -- PHYSX TEST ENDS
 
     -- maek some text
     @text = dye_text.GlText.new 'assets/ttf/noodle.ttf', '', 40
@@ -58,6 +72,14 @@ class App
       -- up
       when 82
         @offsetindex += 1
+      -- left
+      when 80
+        @body.vel.x = -8
+      -- right
+      when 79
+        @body.vel.x = 8
+      else
+        print "Unknown scancode: #{scancode}"
 
   clampOffsetIndex: =>
     if @offsetindex > @map.numLayers
@@ -82,6 +104,11 @@ class App
     -- count frames, yay
     @frame += 1
 
+    -- update physics
+    delta = 1.0
+    @world\collide(delta)
+    @world\step(delta)
+
     @clampOffsetIndex()
     @focusLayer()
 
@@ -90,11 +117,17 @@ class App
     else if @map.layers[@offsetindex] == nil
       @text.value = "layer #{@offsetindex}"
     else
-      @text.value = "layer #{@offsetindex}: #{@map.layers[@offsetindex].tlayer.name}"
+      layer = @map.layers[@offsetindex]
+      @text.value = "layer #{@offsetindex}: #{layer.tlayer.name}"
+      if layer.solid
+        @text.value = "#{@text.value} - solid"
+
+    @text.value = "#{@text.value} - #{@body.pos\toString!}"
 
     -- center text
     with @text.pos
-      .x = 1280 / 2 - @text.size.x / 2
+      -- .x = 1280 / 2 - @text.size.x / 2
+      .x = 200
       .y = 40
 
     with @textbg.pos

@@ -1,6 +1,7 @@
 
 -- ooc stuff
 io_File = require 'sdk:io/File'
+lang_String = require 'sdk:lang/String'
 tiled_Map = require 'tiled:tiled/Map'
 tiled_Layer = require 'tiled:tiled/Layer'
 dye_core = require 'dye:dye/core'
@@ -10,6 +11,7 @@ dye_fbo = require 'dye:dye/gritty/fbo'
 
 -- util stuff
 list = require 'util.list'
+hashmap = require 'util.map'
 
 class Layer
   @totalTiles: 0
@@ -20,6 +22,9 @@ class Layer
 
     @build!
     @cache!
+
+    @solid = hashmap.get(@tlayer.properties, "solid", lang_String.String)
+    print("solid = '#{@solid}'")
 
   build: =>
     for y = 0, tonumber(@tmap.height) - 1
@@ -65,7 +70,7 @@ class Layer
     xnum = tileSet.tilesPerRow
     ynum = tileSet.tilesPerColumn
 
-    sprite = dye_sprite.GlGridSprite.new_fromPath relpath, xnum, ynum
+    sprite = dye_sprite.GlGridSprite.new relpath, xnum, ynum
     with sprite
       .center = false
       .x = position.x / tileSet.tileWidth
