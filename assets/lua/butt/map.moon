@@ -19,10 +19,10 @@ class Map
     @group = dye_core.GlGroup.new()
 
     @layers = {}
+    @numLayers = tonumber(@tmap.mapLayers.size)
 
-    numLayers = @tmap.mapLayers.size
-    for i = 0, tonumber(numLayers) - 1
-      tlayer = list.get(@tmap.mapLayers, i, tiled_Layer.Layer)
+    for i = 1, @numLayers
+      tlayer = list.get(@tmap.mapLayers, i - 1, tiled_Layer.Layer)
       if tlayer.class.name != "Layer"
         print "Skipping layer of type #{tlayer.class.name}"
         continue

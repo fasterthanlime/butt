@@ -41,15 +41,46 @@ class App
             .y = 40
         @dye\add @text
 
+        @offsetindex = 1
+
     update: =>
         -- count frames, yay
         @frame += 1
 
-        -- update window title
-        @dye\setTitle "[PRESS SPACE] frame #{@frame}, fps = #{math.floor(@butt.loop.fps)}"
-
         @text.visible = @input\isPressed(44)
         @map.visible = not @text.visible
+
+        if (@frame % 5) == 0
+          -- down
+          if @input\isPressed(81)
+            @offsetindex -= 1
+
+          -- up
+          if @input\isPressed(82)
+            @offsetindex += 1
+
+        if @offsetindex > @map.numLayers
+          @offsetindex -= @map.numLayers
+        elseif @offsetindex < 1
+          @offsetindex += @map.numLayers
+
+        for i = 1, tonumber(@map.numLayers)
+          if @map.layers[i] == nil
+            continue
+
+          offset = 5
+          with @map.layers[i].sprite.pos
+            if i == @offsetindex
+              .x = offset
+              .y = offset
+            else
+              .x = 0
+              .y = 0
+
+        -- update window title
+        @dye\setTitle "[PRESS SPACE] frame #{@frame}, fps = #{math.floor(@butt.loop.fps)}, offsetindex = #{@offsetindex}"
+
+
 
 -- export da module
 return {
