@@ -1,11 +1,20 @@
 
 -- fix that library stuff
+local ffi = require 'ffi'
+print("ffi.os = " .. ffi.os)
+print("ffi.arch = " .. ffi.arch)
+
 local luaprefix = "./luaprefix"
+local luaext = "so"
+if ffi.os == "Windows" then
+  luaext = "dll"
+else if ffi.os == "OSX" then
+  luaext = "dylib"
+end
+
 package.path = package.path .. ";assets/lua/?.lua"
 package.path = package.path .. ";" .. luaprefix .. "/share/lua/5.1/?/init.lua;" .. luaprefix .. "/share/lua/5.1/?.lua"
-package.path = package.path .. ";" .. luaprefix .. "/share/lua/5.2/?/init.lua;" .. luaprefix .. "/share/lua/5.2/?.lua"
-package.cpath = package.cpath .. ";" .. luaprefix .. "/lib/lua/5.1/?.so"
-package.cpath = package.cpath .. ";" .. luaprefix .. "/lib/lua/5.2/?.so"
+package.cpath = package.cpath .. ";" .. luaprefix .. "/lib/lua/5.1/?." .. luaext
 
 -- moon > coffee
 require("moonscript")

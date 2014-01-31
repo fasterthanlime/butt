@@ -1,6 +1,6 @@
 
 // yada yada we need stuff
-use dye, luajit
+use sdl2, dye, luajit
 
 // no really tho we need stuff
 import dye/[app]
