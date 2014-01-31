@@ -31,7 +31,7 @@ class Map
 
       layer = Layer(@, tlayer)
       @layers[i] = layer
-      @group\add layer.group
+      @group\add layer.sprite
 
     print "Have #{Layer.totalTiles} total tiles"
 
