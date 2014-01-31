@@ -16,7 +16,7 @@ Butt: class extends App {
 
     init: func {
         instance = this
-        super("Butt", 1280, 720)
+        super("Butt", 1280, 704)
     }
 
     setup: func {

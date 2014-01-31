@@ -46,6 +46,7 @@ class Layer
 
     sprite = dye_sprite.GlGridSprite.new_fromPath relpath, xnum, ynum
     with sprite
+      .center = false
       .x = position.x / tileSet.tileWidth
       .y = position.y / tileSet.tileHeight
     with sprite.pos
