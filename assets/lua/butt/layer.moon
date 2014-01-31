@@ -39,6 +39,10 @@ class Layer
 
     @sprite = dye_sprite.GlSprite.new_fromTex(@fbo.texture)
     @sprite.center = false
+    with @sprite.color
+      .r = 230
+      .g = 100
+      .b = 105
 
   getTile: (x, y) =>
     index = x + (y * @tmap.width)

@@ -44,7 +44,7 @@ class App
     @dye\add @textbg
     @dye\add @text
 
-    @offsetindex = 1
+    @offsetindex = 0
     
     onkp = (kp) ->
       @keyPress(kp.scancode)
@@ -61,9 +61,9 @@ class App
 
   clampOffsetIndex: =>
     if @offsetindex > @map.numLayers
-      @offsetindex -= @map.numLayers
-    elseif @offsetindex < 1
-      @offsetindex += @map.numLayers
+      @offsetindex -= @map.numLayers + 1
+    elseif @offsetindex < 0
+      @offsetindex += @map.numLayers + 1
 
   focusLayer: =>
     for i = 1, tonumber(@map.numLayers)
@@ -73,7 +73,7 @@ class App
       sprite = @map.layers[i].sprite
 
       with sprite
-        if i == @offsetindex
+        if @offsetindex == 0 or i == @offsetindex
           .opacity = 1.0
         else
           .opacity = 0.2
@@ -85,7 +85,9 @@ class App
     @clampOffsetIndex()
     @focusLayer()
 
-    if @map.layers[@offsetindex] == nil
+    if @offsetindex == 0
+      @text.value = "all layers"
+    else if @map.layers[@offsetindex] == nil
       @text.value = "layer #{@offsetindex}"
     else
       @text.value = "layer #{@offsetindex}: #{@map.layers[@offsetindex].tlayer.name}"
