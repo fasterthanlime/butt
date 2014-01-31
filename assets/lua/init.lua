@@ -24,6 +24,12 @@ local app = require("butt.app")
 
 -- global state is fun, right?
 local butt = require("butt:butt/butt").Butt.getInstance()
+local logger = require("deadlogger:deadlogger/Log").Log.getLogger("LUA")
+
+print = function (msg)
+  logger:info(msg)
+end
+
 local app = app.App(butt)
 
 function butt_update ()
