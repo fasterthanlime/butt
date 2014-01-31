@@ -15,3 +15,7 @@ luaprefix/share/lua/5.1/moonscript/init.lua:
 lualibs-clean:
 	rm -rf $(LUAPREFIX)
 
+clean: lualibs-clean
+	rock -x
+	rm -rf *.dSYM
+
