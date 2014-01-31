@@ -34,7 +34,6 @@ class Layer
     @pass = dye_core.Pass.new(@map.app.dye, 1, @fbo)
     @pass.catchAll = true
     @pass.group = @group
-    @pass.clears = false
     @pass\render!
 
     @sprite = dye_sprite.GlSprite.new_fromTex(@fbo.texture)
