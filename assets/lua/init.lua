@@ -17,14 +17,14 @@ package.path = package.path .. ";" .. luaprefix .. "/share/lua/5.1/?/init.lua;" 
 package.cpath = package.cpath .. ";" .. luaprefix .. "/lib/lua/5.1/?." .. luaext
 
 -- moon > coffee
-require("moonscript")
+require('moonscript')
 
 -- where it all begins
-local app = require("butt.app")
+local app = require('butt.app')
 
 -- global state is fun, right?
-local butt = require("butt:butt/butt").Butt.getInstance()
-local logger = require("deadlogger:deadlogger/Log").Log.getLogger("LUA")
+local butt = require('butt:butt/butt').Butt.getInstance()
+local logger = require('deadlogger:deadlogger/Log').Log.getLogger('LUA')
 
 print = function (msg)
   logger:info(msg)
