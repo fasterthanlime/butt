@@ -19,8 +19,8 @@ class App
   new: (@butt) =>
     @dye = @butt.dye
     @world = quantum_world.World.new()
-    @world.gravity = -1.1
-    @world.maxFallVel = -6
+    @world.gravity = -0.71
+    @world.maxFallVel = -20
 
     @input = @dye.input
     @frame = 0
@@ -82,7 +82,8 @@ class App
         return
       -- space
       when 44
-        @body.vel.y = 16
+        if @body.touchesGround
+          @body.vel.y = 12
       else
         print "Unknown scancode: #{scancode}"
 
@@ -115,15 +116,17 @@ class App
       @world\collide(delta)
       @world\step(delta)
 
+    speed = 6.5
+
     ---- key input
     if @input\isPressed(80)
       -- left
       @hero.scale.x = -1
-      @body.vel.x = -5
+      @body.vel.x = -speed
     elseif @input\isPressed(79)
       -- right
       @hero.scale.x = 1
-      @body.vel.x = 5
+      @body.vel.x = speed
     else
       @body.vel.x *= 0.85
 
