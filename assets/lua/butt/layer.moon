@@ -34,8 +34,7 @@ class Layer
     fboSize = dye_math.Vec2i.new(1280, 704)
     @fbo = dye_fbo.Fbo.new(fboSize)
 
-    -- 1 = RenderTarget TEXTURE
-    @pass = dye_core.Pass.new(@map.app.dye, 1, @fbo)
+    @pass = dye_core.Pass.new(@map.app.dye, dye_core.RenderTarget.TEXTURE, @fbo)
     @pass.catchAll = true
     @pass.group = @group
     @pass\render!

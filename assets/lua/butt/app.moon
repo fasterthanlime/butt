@@ -68,20 +68,19 @@ class App
 
   keyPress: (scancode) =>
     switch scancode
-      -- down
-      when 81
+      when dye_input.KeyCode.DOWN
         @offsetindex -= 1
-      -- up
-      when 82
+
+      when dye_input.KeyCode.UP
         @offsetindex += 1
-      -- left
-      when 80
+
+      when dye_input.KeyCode.LEFT
         return
-      -- right
-      when 79
+
+      when dye_input.KeyCode.RIGHT
         return
-      -- space
-      when 44
+
+      when dye_input.KeyCode.SPACE
         if @body.touchesGround
           @body.vel.y = 12
       else
@@ -119,12 +118,10 @@ class App
     speed = 6.5
 
     ---- key input
-    if @input\isPressed(80)
-      -- left
+    if @input\isPressed(dye_input.KeyCode.LEFT)
       @hero.scale.x = -1
       @body.vel.x = -speed
-    elseif @input\isPressed(79)
-      -- right
+    elseif @input\isPressed(dye_input.KeyCode.RIGHT)
       @hero.scale.x = 1
       @body.vel.x = speed
     else
