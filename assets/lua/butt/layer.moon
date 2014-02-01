@@ -8,6 +8,7 @@ dye_core = require 'dye:dye/core'
 dye_math = require 'dye:dye/math'
 dye_sprite = require 'dye:dye/sprite'
 dye_fbo = require 'dye:dye/gritty/fbo'
+quantum_world = require 'quantum:quantum/world'
 
 -- util stuff
 list = require 'util.list'
@@ -20,11 +21,9 @@ class Layer
     @tmap = @map.tmap
     @group = dye_core.GlGroup.new()
 
+    @solid = hashmap.get(@tlayer.properties, "solid", lang_String.String)
     @build!
     @cache!
-
-    @solid = hashmap.get(@tlayer.properties, "solid", lang_String.String)
-    print("solid = '#{@solid}'")
 
   build: =>
     for y = 0, tonumber(@tmap.height) - 1
@@ -80,6 +79,15 @@ class Layer
       .y = (@tmap.height - 1 - y) * tileSet.tileHeight
 
     @group\add sprite
+
+    if @solid
+      -- create geometry
+      box = quantum_world.AABBShape.new(32, 32)
+      box.inert = true
+      with box.pos
+        .x = sprite.pos.x + 16
+        .y = sprite.pos.y + 16
+      @map.app.world\addShape box
 
 return {
   :Layer

@@ -19,6 +19,8 @@ class App
   new: (@butt) =>
     @dye = @butt.dye
     @world = quantum_world.World.new()
+    @world.gravity = -1.1
+    @world.maxFallVel = -6
 
     @input = @dye.input
     @frame = 0
@@ -31,14 +33,14 @@ class App
     @dye\add @map.group
 
     -- PHYSX TEST STARTS
-    shape = quantum_world.AABBShape.new(20, 20)
+    shape = quantum_world.AABBShape.new(32, 64)
     @body = quantum_world.Body.new(shape)
     @world\addBody @body
 
-    hero = dye_sprite.GlSprite.new("assets/png/hero-idle.png")
-    hero.pos = @body.pos
-    hero.pos\set__bang(600, 400)
-    @dye\add hero
+    @hero = dye_sprite.GlSprite.new("assets/png/hero-idle.png")
+    @hero.pos = @body.pos
+    @hero.pos\set__bang(600, 400)
+    @dye\add @hero
     -- PHYSX TEST ENDS
 
     -- maek some text
@@ -74,10 +76,13 @@ class App
         @offsetindex += 1
       -- left
       when 80
-        @body.vel.x = -8
+        return
       -- right
       when 79
-        @body.vel.x = 8
+        return
+      -- space
+      when 44
+        @body.vel.y = 16
       else
         print "Unknown scancode: #{scancode}"
 
@@ -105,9 +110,22 @@ class App
     @frame += 1
 
     -- update physics
-    delta = 1.0
-    @world\collide(delta)
-    @world\step(delta)
+    delta = 0.33
+    for i = 1,3
+      @world\collide(delta)
+      @world\step(delta)
+
+    ---- key input
+    if @input\isPressed(80)
+      -- left
+      @hero.scale.x = -1
+      @body.vel.x = -5
+    elseif @input\isPressed(79)
+      -- right
+      @hero.scale.x = 1
+      @body.vel.x = 5
+    else
+      @body.vel.x *= 0.85
 
     @clampOffsetIndex()
     @focusLayer()
@@ -122,7 +140,7 @@ class App
       if layer.solid
         @text.value = "#{@text.value} - solid"
 
-    @text.value = "#{@text.value} - #{@body.pos\toString!}"
+    @text.value = "#{@text.value} - pos #{@body.pos\toString!} - vel #{@body.vel\toString!}"
 
     -- center text
     with @text.pos
